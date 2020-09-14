@@ -1,0 +1,23 @@
+.button {
+  position: relative;
+
+  display: inline-block;
+  min-width: 24px;
+  height: 24px;
+  padding: 3px;
+
+  text-align: center;
+
+  background-color: transparent;
+  border: none;
+
+  .button-activity(@color-button-active-red,@color-button-hover);
+
+  & .material-icons {
+    font-size: 18px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
