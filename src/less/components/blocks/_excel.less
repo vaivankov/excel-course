@@ -1,6 +1,3 @@
-.excel {
-}
-
 .excel__header {
   display: flex;
   justify-content: space-between;
@@ -25,4 +22,6 @@
 }
 
 .excel__table {
+  height: calc(100vh - @header-height - @toolbar-height - @formula-height);
+  overflow-x: auto;
 }
