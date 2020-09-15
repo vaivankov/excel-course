@@ -11,11 +11,16 @@
   background-color: transparent;
   border: none;
 
+  &:active {
+    color: @color-button-active-green;
+  }
+
   & .material-icons {
     font-size: 18px;
   }
 
   &:hover {
+    background: @color-button-hover;
     cursor: pointer;
   }
 }
