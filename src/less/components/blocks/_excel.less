@@ -1,0 +1,27 @@
+.excel__header {
+  display: flex;
+  justify-content: space-between;
+  height: @height-header;
+  padding: 8px 4px 0;
+}
+
+.excel__toolbar {
+  height: @height-toolbar;
+  padding: 7px 10px;
+
+  border-top: 1px solid @color-input-border;
+  border-bottom: 1px solid @color-input-border;
+}
+
+.excel__formula {
+  display: flex;
+  align-items: center;
+  height: @height-formula;
+
+  border-bottom: 1px solid @color-input-border;
+}
+
+.excel__table {
+  height: calc(100vh - @height-header - @height-toolbar - @height-formula);
+  overflow: auto;
+}

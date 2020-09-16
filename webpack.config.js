@@ -1,15 +1,15 @@
-const { dirname } = require("path");
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
 
-const getFileName = (ext) => {
-	return isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+const getFileName = (name, ext) => {
+	return isDev ? `${name}.${ext}` : `${name}.[hash].${ext}`;
 };
 
 const returnLoaders = () => {
@@ -34,7 +34,7 @@ module.exports = {
 	mode: "development",
 	entry: ["@babel/polyfill", "./index.js"],
 	output: {
-		filename: getFileName("js"),
+		filename: getFileName("main", "js"),
 		path: path.resolve(__dirname, "dist"),
 	},
 	resolve: {
@@ -47,6 +47,8 @@ module.exports = {
 	devtool: isDev ? "source-map" : false,
 	devServer: {
 		port: 3000,
+		watchContentBase: true,
+		contentBase: path.resolve(__dirname, "src"),
 		hot: isDev,
 	},
 	plugins: [
@@ -67,14 +69,21 @@ module.exports = {
 			],
 		}),
 		new MiniCssExtractPlugin({
-			filename: getFileName("css"),
+			filename: getFileName("style", "css"),
+		}),
+		new OptimizeCssAssetsPlugin({
+			cssProcessorPluginOptions: {
+				preset: ["default", { discardComments: { removeAll: true } }],
+			},
 		}),
 	],
 	module: {
 		rules: [
 			{
 				test: /\.less$/,
+				exclude: /node_modules/,
 				use: [
+					{ loader: "style-loader" },
 					{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
@@ -82,7 +91,7 @@ module.exports = {
 							reloadAll: true,
 						},
 					},
-					"css-loader",
+					{ loader: "css-loader" },
 					{
 						loader: "less-loader",
 						options: {
@@ -92,6 +101,14 @@ module.exports = {
 						},
 					},
 				],
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				loader: "file-loader",
+				options: {
+					outputPath: "fonts",
+					name: "[name].[ext]",
+				},
 			},
 			{
 				test: /\.m?js$/,

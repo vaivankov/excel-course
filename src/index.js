@@ -1,3 +1,3 @@
-import "./less/index.less";
+import "./less/style.less";
 
 console.log("Loading...");
