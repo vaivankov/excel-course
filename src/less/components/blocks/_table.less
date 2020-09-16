@@ -1,7 +1,7 @@
 .table__row {
   display: flex;
   flex-direction: row;
-  height: @row-height;
+  height: @height-row;
   min-height: 20px;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: @info-cell-width;
+  min-width: @width-info-cell;
 
   background: @color-table-background;
   border: 1px solid @color-input-border;
@@ -24,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: @cell-width;
+  width: @width-cell;
   min-width: 40px;
 
   background: @color-table-background;
@@ -34,7 +34,7 @@
 }
 
 .table__cell {
-  width: @cell-width;
+  width: @width-cell;
   min-width: 40px;
   padding: 5px;
 
