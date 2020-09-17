@@ -6,7 +6,20 @@
 		"node": true
 	},
 	"rules": {
-		"quotes": "off"
+		"quotes": "off",
+		"require-jsdoc": [
+			2,
+			{
+				"require": {
+					"FunctionDeclaration": true,
+					"MethodDefinition": false,
+					"ClassDeclaration": false
+				}
+			}
+		]
 	},
-	"extends": ["eslint:recommended", "google"]
+	"extends": [
+		"eslint:recommended",
+		"google"
+	]
 }
