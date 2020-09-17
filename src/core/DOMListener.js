@@ -3,5 +3,6 @@ export class DomListener {
     if (!$root) {
       throw new Error(`No $root provided for DOMListener!`);
     }
+    this.$root = $root;
   }
 }

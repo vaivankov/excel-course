@@ -11,7 +11,7 @@
 			2,
 			{
 				"require": {
-					"FunctionDeclaration": true,
+					"FunctionDeclaration": false,
 					"MethodDefinition": false,
 					"ClassDeclaration": false
 				}
