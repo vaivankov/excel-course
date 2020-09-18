@@ -18,6 +18,10 @@ class Dom {
     return this;
   }
 
+  on(eventType, callback) {
+    this.$element.addEventListener(eventType, callback);
+  }
+
   appendChild(node) {
     if (Element.prototype.appendChild) {
       this.$element.appendChild(node.$element);
