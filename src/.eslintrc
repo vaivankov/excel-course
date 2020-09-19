@@ -7,7 +7,18 @@
 	},
 	"rules": {
 		"quotes": "off",
-		"require-jsdoc": "off"
+		"require-jsdoc": "off",
+		"no-unused-vars": "warn",
+		"no-redeclare": "warn",
+		"space-infix-ops": "warn",
+		"padding-line-between-statements": "warn",
+		"function-call-argument-newline": "warn",
+		"function-paren-newline": "warn",
+		"newline-per-chained-call": "warn",
+		"object-curly-spacing": "warn",
+		"object-curly-newline": "warn",
+		"object-property-newline": "warn",
+		"one-var-declaration-per-line": "warn"
 	},
 	"extends": [
 		"eslint:recommended",
