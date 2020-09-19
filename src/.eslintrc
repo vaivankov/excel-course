@@ -18,7 +18,15 @@
 		"object-curly-spacing": "warn",
 		"object-curly-newline": "warn",
 		"object-property-newline": "warn",
-		"one-var-declaration-per-line": "warn"
+		"one-var-declaration-per-line": "warn",
+		"key-spacing": [
+			"warn",
+			{
+				"beforeColon": false,
+				"afterColon": true,
+				"mode": "strict"
+			}
+		]
 	},
 	"extends": [
 		"eslint:recommended",

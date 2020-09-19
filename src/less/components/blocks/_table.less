@@ -21,6 +21,8 @@
 }
 
 .table__column {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +33,23 @@
   border: 1px solid @color-input-border;
   border-top: 0;
   border-left: 0;
+}
+
+.table__column-resize {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 3px;
+
+  background-color: @color-input-focus;
+  opacity: 0;
+
+  &:hover {
+    cursor: col-resize;
+    opacity: 1;
+  }
 }
 
 .table__cell {

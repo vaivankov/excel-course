@@ -8,7 +8,11 @@ function createCell(colsCount) {
 }
 
 function toColumn(col) {
-  return `<div class="table__column">${col}</div>`;
+  return `
+      <div class="table__column">
+        ${col}
+        <div class="table__column-resize"></div>
+      </div>`;
 }
 
 function createRow(content, index = "") {
