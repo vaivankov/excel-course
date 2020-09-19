@@ -6,6 +6,8 @@
 }
 
 .table__row-info {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,6 +50,23 @@
 
   &:hover {
     cursor: col-resize;
+    opacity: 1;
+  }
+}
+
+.table__row-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 4px;
+
+  background-color: @color-input-focus;
+  opacity: 0;
+
+  &:hover {
+    cursor: row-resize;
     opacity: 1;
   }
 }

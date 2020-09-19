@@ -16,9 +16,13 @@ function toColumn(col) {
 }
 
 function createRow(content, index = "") {
+  const resize = index ? `<div class="table__row-resize"></div>` : '';
   return `
     <div class="table__row">
-      <div class="table__row-info">${index}</div>
+      <div class="table__row-info">
+        ${index}
+        ${resize}
+      </div>
       <div class="table__row-data">${content}</div>
     </div>  
   `;
