@@ -8,13 +8,20 @@ function createCell(colsCount) {
 }
 
 function toColumn(col) {
-  return `<div class="table__column">${col}</div>`;
+  return `
+      <div class="table__column" data-type="resizable">
+        ${col}
+        <div class="table__column-resize" data-resize="col"></div>
+      </div>`;
 }
 
 function createRow(content, index = "") {
+  const resize = index ?
+    `<div class="table__row-resize" data-resize="row"></div>` :
+    '';
   return `
-    <div class="table__row">
-      <div class="table__row-info">${index}</div>
+    <div class="table__row" data-type="resizable">
+      <div class="table__row-info">${index}${resize}</div>
       <div class="table__row-data">${content}</div>
     </div>  
   `;

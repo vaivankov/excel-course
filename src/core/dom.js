@@ -19,17 +19,38 @@ class Dom {
   }
 
   on(eventType, callback) {
-    this.$element.addEventListener(eventType, callback);
+    this.$element.addEventListener(
+        eventType,
+        callback
+    );
   }
 
   off(eventType, callback) {
-    this.$element.removeEventListener(eventType, callback);
+    this.$element.removeEventListener(
+        eventType,
+        callback
+    );
   }
 
   appendChild(node) {
     if (Element.prototype.appendChild) {
       this.$element.appendChild(node.$element);
     }
+  }
+
+  closest(selector) {
+    return $(this.$element.closest(selector));
+  }
+
+  getCoords() {
+    return this.$element.getBoundingClientRect();
+  }
+
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach((key) =>
+          this.$element.style[key] = styles[key]);
   }
 }
 

@@ -4,10 +4,13 @@ export class Toolbar extends ExcelComponent {
   static className = 'excel__toolbar'
 
   constructor($root) {
-    super($root, {
-      name: 'Toolbar',
-      listeners: ['click'],
-    });
+    super(
+        $root,
+        {
+          name: 'Toolbar',
+          listeners: ['click'],
+        }
+    );
   }
 
   toHTML() {
