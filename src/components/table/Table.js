@@ -28,7 +28,7 @@ export class Table extends ExcelComponent {
         document.onmousemove = (e) => {
           const delta = e.clientX - coords.right;
           const value = coords.width + delta;
-          $parent.$element.style.width = value + 'px';
+          $parent.css({width: value + 'px'});
         };
 
         document.onmouseup = (e) => {
@@ -45,14 +45,15 @@ export class Table extends ExcelComponent {
         document.onmousemove = (e) => {
           const delta = e.clientY - coords.bottom;
           const value = coords.height + delta;
-          $parent.$element.style.height = value + 'px';
+          $parent.css({height: value + 'px'});
         };
 
         document.onmouseup = (e) => {
           document.onmousemove = null;
           const delta = e.clientY - coords.bottom;
           const value = coords.height + delta;
-          $parent.$element.style.height = value + 'px';
+          $parent.css({height: value + 'px'});
+          document.onmouseup = null;
         };
       }
     }

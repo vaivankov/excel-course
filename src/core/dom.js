@@ -45,6 +45,13 @@ class Dom {
   getCoords() {
     return this.$element.getBoundingClientRect();
   }
+
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach((key) =>
+          this.$element.style[key] = styles[key]);
+  }
 }
 
 export function $(selector) {
