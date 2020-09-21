@@ -27,14 +27,15 @@ export class Table extends ExcelComponent {
       if (evt.target.dataset.resize === 'col') {
         document.onmousemove = (e) => {
           const delta = e.clientX - coords.right;
-          const value = coords.width + delta;
-          $parent.css({width: value + 'px'});
+          $resizer.css({right: -delta + 'px'});
         };
 
         document.onmouseup = (e) => {
           document.onmousemove = null;
           const delta = e.clientX - coords.right;
           const value = coords.width + delta;
+          $resizer.css({right: 0 + 'px'});
+          $parent.css({width: value + 'px'});
           this.resizeColumn(
               value,
               $resizer.$element
@@ -44,14 +45,14 @@ export class Table extends ExcelComponent {
       } else {
         document.onmousemove = (e) => {
           const delta = e.clientY - coords.bottom;
-          const value = coords.height + delta;
-          $parent.css({height: value + 'px'});
+          $resizer.css({bottom: -delta + 'px'});
         };
 
         document.onmouseup = (e) => {
           document.onmousemove = null;
           const delta = e.clientY - coords.bottom;
           const value = coords.height + delta;
+          $resizer.css({bottom: 0 + 'px'});
           $parent.css({height: value + 'px'});
           document.onmouseup = null;
         };
