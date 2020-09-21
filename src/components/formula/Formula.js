@@ -4,10 +4,13 @@ export class Formula extends ExcelComponent {
   static className = 'excel__formula';
 
   constructor($root) {
-    super($root, {
-      name: 'Formula',
-      listeners: ['input', 'click'],
-    });
+    super(
+        $root,
+        {
+          name: 'Formula',
+          listeners: ['input', 'click'],
+        }
+    );
   }
 
   toHTML() {
@@ -17,7 +20,10 @@ export class Formula extends ExcelComponent {
   }
 
   onInput(evt) {
-    console.log(this.name + ': onInput', evt.target.textContent.trim());
+    console.log(
+        this.name + ': onInput',
+        evt.target.textContent.trim()
+    );
   }
 
   onClick(evt) {

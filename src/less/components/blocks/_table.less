@@ -16,6 +16,8 @@
   background: @color-table-background;
   border: 1px solid @color-input-border;
   border-top: none;
+
+  user-select: none;
 }
 
 .table__row-data {
@@ -35,6 +37,8 @@
   border: 1px solid @color-input-border;
   border-top: 0;
   border-left: 0;
+
+  user-select: none;
 }
 
 .table__column-resize {
@@ -48,9 +52,22 @@
   background-color: @color-input-focus;
   opacity: 0;
 
+  &:active,
   &:hover {
     cursor: col-resize;
     opacity: 1;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      width: 1px;
+      height: 100vh;
+
+      background-color: @color-input-focus;
+    }
   }
 }
 
@@ -65,19 +82,38 @@
   background-color: @color-input-focus;
   opacity: 0;
 
+  &:active,
   &:hover {
     cursor: row-resize;
     opacity: 1;
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      width: 100vw;
+      height: 1px;
+
+      background-color: @color-input-focus;
+    }
   }
+}
+
+.table__cell::-webkit-scrollbar {
+  display: none;
 }
 
 .table__cell {
   width: @width-cell;
   min-width: 40px;
   padding: 5px;
+  overflow-y: scroll;
 
   color: @color-black;
-  white-space: nowrap;
+  white-space: wrap;
 
   border: 1px solid @color-table-cell;
   border-top: 0;

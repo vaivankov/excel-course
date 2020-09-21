@@ -7,10 +7,16 @@ export class Excel {
   }
 
   getRootElement() {
-    const $rootElement = $.create('div', 'excel');
+    const $rootElement = $.create(
+        'div',
+        'excel'
+    );
 
     this.components = this.components.map((Component) => {
-      const $component = $.create('div', Component.className);
+      const $component = $.create(
+          'div',
+          Component.className
+      );
       const component = new Component($component);
       $component.html(component.toHTML());
       $rootElement.appendChild($component);
