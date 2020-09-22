@@ -46,6 +46,10 @@ class Dom {
     return this.$element.getBoundingClientRect();
   }
 
+  findAll(selector) {
+    return this.$element.querySelectorAll(selector);
+  }
+
   css(styles = {}) {
     Object
         .keys(styles)
