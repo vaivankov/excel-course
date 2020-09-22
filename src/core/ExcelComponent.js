@@ -7,6 +7,11 @@ export class ExcelComponent extends DomListener {
         options.listeners
     );
     this.name = options.name || '';
+    this.prepare();
+  }
+
+  prepare() {
+    return;
   }
 
   toHTML() {

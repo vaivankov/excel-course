@@ -50,11 +50,23 @@ class Dom {
     return this.$element.querySelectorAll(selector);
   }
 
+  find(selector) {
+    return $(this.$element.querySelector(selector));
+  }
+
   css(styles = {}) {
     Object
         .keys(styles)
         .forEach((key) =>
           this.$element.style[key] = styles[key]);
+  }
+
+  addClass(className) {
+    this.$element.classList.add(className);
+  }
+
+  removeClass(className) {
+    this.$element.classList.remove(className);
   }
 }
 
