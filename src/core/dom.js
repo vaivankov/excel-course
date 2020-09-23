@@ -54,6 +54,17 @@ class Dom {
     return $(this.$element.querySelector(selector));
   }
 
+  getId(parse) {
+    if (parse) {
+      const parsed = this.getId().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.$element.dataset.id;
+  }
+
   css(styles = {}) {
     Object
         .keys(styles)
