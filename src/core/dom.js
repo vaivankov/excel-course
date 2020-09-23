@@ -65,6 +65,11 @@ class Dom {
     return this.$element.dataset.id;
   }
 
+  focusCell() {
+    this.$element.focus();
+    return this;
+  }
+
   css(styles = {}) {
     Object
         .keys(styles)

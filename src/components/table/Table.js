@@ -3,7 +3,7 @@ import {$} from '@core/dom';
 import {createTable} from './table_template';
 import {resizeCell} from "./cell_resizer";
 import {TableSelection} from './TableSelection';
-import {isCell, getMatrix, shouldResize} from "./table_functions";
+import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -12,7 +12,7 @@ export class Table extends ExcelComponent {
     super(
         $root,
         {
-          listeners: ['mousedown'],
+          listeners: ['mousedown', 'keydown'],
         }
     );
   }
@@ -22,7 +22,7 @@ export class Table extends ExcelComponent {
   }
 
   toHTML() {
-    return createTable();
+    return createTable(15);
   }
 
   init() {
@@ -50,6 +50,24 @@ export class Table extends ExcelComponent {
       } else {
         this.selection.select($target);
       }
+    }
+  }
+
+  onKeydown(event) {
+    const {key} = event;
+
+    const keys = [
+      'Enter', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp',
+    ];
+
+    if (keys.includes(key) && !event.shiftKey) {
+      event.preventDefault();
+      const id = this.selection.current.getId(true);
+      const $nextCell = this.$root.find(nextSelector(
+          key,
+          id
+      ));
+      this.selection.select($nextCell);
     }
   }
 }
