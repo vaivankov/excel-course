@@ -13,6 +13,10 @@ class Dom {
     return this.$element.outerHTML.trim();
   }
 
+  text(text) {
+    this.$element.textContent = text;
+  }
+
   clear() {
     this.html('');
     return this;
