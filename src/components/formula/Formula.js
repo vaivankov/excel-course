@@ -8,7 +8,7 @@ export class Formula extends ExcelComponent {
         $root,
         {
           name: 'Formula',
-          listeners: ['input'],
+          listeners: ['input', 'keydown'],
           ...options,
         }
     );
@@ -25,6 +25,13 @@ export class Formula extends ExcelComponent {
     this.$emit(
         'formula:input',
         text
+    );
+  }
+
+  onKeydown(evt) {
+    this.$emit(
+        'formula:editDone',
+        evt
     );
   }
 }

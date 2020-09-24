@@ -39,6 +39,16 @@ export class Table extends ExcelComponent {
           this.selection.current.text(text);
         }
     );
+
+    this.$on(
+        'formula:editDone',
+        (evt) => {
+          if (evt.code === "Enter") {
+            evt.preventDefault();
+            this.selection.current.focusCell();
+          }
+        }
+    );
   }
 
   onMousedown(event) {
