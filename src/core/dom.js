@@ -14,7 +14,14 @@ class Dom {
   }
 
   text(text) {
-    this.$element.textContent = text;
+    if (typeof text === 'string') {
+      this.$element.textContent = text;
+      return this;
+    }
+    if (this.$element.tagName.toLowerCase() === 'input') {
+      return this.$element.value.trim();
+    }
+    return this.$element.textContent.trim();
   }
 
   clear() {
@@ -83,10 +90,12 @@ class Dom {
 
   addClass(className) {
     this.$element.classList.add(className);
+    return this;
   }
 
   removeClass(className) {
     this.$element.classList.remove(className);
+    return this;
   }
 }
 
