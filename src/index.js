@@ -10,9 +10,7 @@ import {rootReducer} from "./redux/rootReducer";
 
 const store = createStore(
     rootReducer,
-    {
-      colState: {},
-    }
+    storage('excel-state')
 );
 
 store.subscribe((state) => {
