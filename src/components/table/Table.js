@@ -1,28 +1,110 @@
 import {ExcelComponent} from '@core/ExcelComponent';
+import {$} from '@core/dom';
 import {createTable} from './table_template';
 import {resizeCell} from "./cell_resizer";
+import {TableSelection} from './TableSelection';
+import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
+
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super(
         $root,
         {
-          listeners: ['mousedown'],
+          name: 'Table',
+          listeners: ['mousedown', 'keydown', 'input'],
+          ...options,
         }
     );
   }
 
-  toHTML() {
-    return createTable();
+  prepare() {
+    this.selection = new TableSelection();
   }
 
-  onMousedown(evt) {
-    if (evt.target.dataset.resize) {
+  toHTML() {
+    return createTable(15);
+  }
+
+  init() {
+    super.init();
+
+    const $cell = this.$root.find('[data-id="0:0"]');
+    this.selectCell($cell);
+
+    this.$on(
+        'formula:input',
+        (text) => {
+          this.selection.current.text(text);
+        }
+    );
+
+    this.$on(
+        'formula:editDone',
+        (evt) => {
+          const keys = [
+            'Enter', 'Tab',
+          ];
+          if (keys.includes(evt.key)) {
+            evt.preventDefault();
+            this.selection.current.focusCell();
+          }
+        }
+    );
+  }
+
+  selectCell($cell) {
+    this.selection.select($cell);
+    this.$emit(
+        'table:selectCell',
+        $cell
+    );
+  }
+
+  onMousedown(event) {
+    if (shouldResize(event)) {
       resizeCell(
           this.$root,
-          evt
+          event
       );
+    } else if (isCell(event)) {
+      const $target = $(event.target);
+      if (event.shiftKey) {
+        const $cells = getMatrix(
+            $target,
+            this.selection.current
+        )
+            .map((id) => this.$root.find(`[data-id="${id}"]`));
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
+  }
+
+  onKeydown(event) {
+    const {key} = event;
+
+    const keys = [
+      'Enter', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp',
+    ];
+
+    if (keys.includes(key) && !event.shiftKey) {
+      event.preventDefault();
+      const id = this.selection.current.getId(true);
+      const $nextCell = this.$root.find(nextSelector(
+          key,
+          id
+      ));
+      this.selectCell($nextCell);
+    }
+  }
+
+  onInput(evt) {
+    this.$emit(
+        'table:inputCell',
+        $(evt.target)
+    );
   }
 }
