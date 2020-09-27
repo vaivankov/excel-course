@@ -44,8 +44,11 @@ export function resizeCell($root, event) {
       } else {
         $cellHeader.css(cellStyles);
       }
-      resolve({value,
-        id: type === 'col' ? resizeCellIndex : null});
+      resolve({
+        type,
+        id: resizeCellIndex,
+        value,
+      });
     };
   });
 }

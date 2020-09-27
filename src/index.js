@@ -5,12 +5,12 @@ import {Toolbar} from "./components/toolbar/Toolbar";
 import {Formula} from "./components/formula/Formula";
 import {Table} from "./components/table/Table";
 import {createStore} from "./core/createStore";
-import {storage} from "./core/utils";
+import {checkStorage} from "./core/utils";
 import {rootReducer} from "./redux/rootReducer";
 
 const store = createStore(
     rootReducer,
-    storage('excel-state')
+    checkStorage('excel-state')
 );
 
 store.subscribe((state) => {
@@ -18,7 +18,7 @@ store.subscribe((state) => {
       'AppState',
       state
   );
-  storage(
+  checkStorage(
       'excel-state',
       state
   );

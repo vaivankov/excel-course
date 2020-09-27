@@ -1,12 +1,16 @@
+import * as defaultValues from './default_values';
+
 const CODES = {
   A: 65,
   Z: 90,
 };
 
-const DEFAULT_WIDTH = 120;
-
 function getWidth(state, index) {
-  return (state[index] || DEFAULT_WIDTH) + 'px';
+  return (state[index] || defaultValues.WIDTH) + 'px';
+}
+
+function getHeight(state, index) {
+  return (state[index] || defaultValues.HEIGHT) + 'px';
 }
 
 function toCell(row, state) {
@@ -36,15 +40,27 @@ function toColumn({col, width}) {
       </div>`;
 }
 
-function createRow(content, index = "") {
+function createRow(content, index = "", state) {
   const resize = index ?
     `<div class="table__row-resize" data-resize="row"></div>` : '';
+  let height;
+  if (state) {
+    height = getHeight(
+        state.rowState,
+        index
+    );
+  }
   return `
-    <div class="table__row" data-type="resizable">
+    <div
+      class="table__row"
+      data-type="resizable"
+      data-row="${index}"
+      style="height: ${height}"
+    >
       <div class="table__row-info">${index}${resize}</div>
       <div class="table__row-data">${content}</div>
     </div>  
-  `;
+    `;
 }
 
 function toChar(_, index) {
@@ -86,7 +102,8 @@ export function createTable(rowsCount = 15, state = {}) {
 
     rows.push(createRow(
         cells,
-        row + 1
+        row + 1,
+        state
     ));
   }
 

@@ -4,7 +4,7 @@ import {createTable} from './table_template';
 import {resizeCell} from "./cell_resizer";
 import {TableSelection} from './TableSelection';
 import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
-import * as actions from './../../redux/actions';
+import {cellResize} from '../../redux/actions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -72,7 +72,7 @@ export class Table extends ExcelComponent {
           this.$root,
           event
       );
-      this.$dispatch(actions.tableResize(data));
+      this.$dispatch(cellResize(data));
     } catch (err) {
       console.warn(
           'Resize error:',
