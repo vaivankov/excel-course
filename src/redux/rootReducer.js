@@ -1,21 +1,16 @@
-import * as actionsName from './type';
+import {CELL_RESIZE} from './type';
 
 export function rootReducer(state, action) {
   let prevState;
+  let field;
   switch (action.type) {
-    case actionsName.COL_RESIZE:
-      prevState = state.colState || {};
+    case CELL_RESIZE:
+      field = action.data.type === 'col' ? 'colState' : 'rowState';
+      prevState = state[field] || {};
       prevState[action.data.id] = action.data.value;
       return {
         ...state,
-        colState: prevState,
-      };
-    case actionsName.ROW_RESIZE:
-      prevState = state.rowState || {};
-      prevState[action.data.id] = action.data.value;
-      return {
-        ...state,
-        rowState: prevState,
+        [field]: prevState,
       };
     default:
       return state;

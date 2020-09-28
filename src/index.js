@@ -7,10 +7,11 @@ import {Table} from "./components/table/Table";
 import {createStore} from "./core/createStore";
 import {checkStorage} from "./core/utils";
 import {rootReducer} from "./redux/rootReducer";
+import {initialState} from "./redux/initial_state";
 
 const store = createStore(
     rootReducer,
-    checkStorage('excel-state')
+    initialState
 );
 
 store.subscribe((state) => {

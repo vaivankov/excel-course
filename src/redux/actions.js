@@ -1,7 +1,8 @@
+import {CELL_RESIZE} from "./type";
+
 export function cellResize(data) {
-  const type = data.type.toUpperCase() + "_RESIZE";
   return {
-    type,
+    type: CELL_RESIZE,
     data,
   };
 }
