@@ -27,4 +27,8 @@ export class TableSelection {
       $element.addClass(TableSelection.className);
     });
   }
+
+  applyStyle(style) {
+    this.group.forEach(($element)=>$element.css(style));
+  }
 }

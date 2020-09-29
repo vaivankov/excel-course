@@ -57,6 +57,13 @@ export class Table extends ExcelComponent {
           }
         }
     );
+
+    this.$on(
+        'toolbar:applyStyle',
+        (style)=>{
+          this.selection.applyStyle(style);
+        }
+    );
   }
 
   selectCell($cell) {
