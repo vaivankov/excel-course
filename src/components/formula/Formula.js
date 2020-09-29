@@ -38,12 +38,13 @@ export class Formula extends ExcelComponent {
         }
     );
 
-    this.$on(
-        'table:inputCell',
-        ($cell) => {
-          this.$formula.text($cell.text());
-        }
-    );
+    this.$subscribe((state) => {
+      console.log(
+          'Formula update',
+          state.currentText
+      );
+      this.$formula.text(state.currentText);
+    });
   }
 
   onInput(evt) {

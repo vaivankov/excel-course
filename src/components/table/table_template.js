@@ -19,15 +19,17 @@ function toCell(row, state) {
         state.colState,
         col
     );
+    const id = `${row}:${col}`;
+    const text = state.dataState[id] || '';
     return `
       <div 
         class="table__cell" 
         contenteditable 
         data-col="${col}"
         data-type="cell"
-        data-id="${row}:${col}"
+        data-id=${id}
         style="width: ${width}"
-      ></div>
+      >${text}</div>
     `;
   };
 }

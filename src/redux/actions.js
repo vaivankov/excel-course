@@ -1,8 +1,15 @@
-import {CELL_RESIZE} from "./type";
+import {CHANGE_TEXT, RESIZE_CELL} from "./type";
 
 export function cellResize(data) {
   return {
-    type: CELL_RESIZE,
+    type: RESIZE_CELL,
+    data,
+  };
+}
+
+export function changeText(data) {
+  return {
+    type: CHANGE_TEXT,
     data,
   };
 }

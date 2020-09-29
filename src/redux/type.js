@@ -1,1 +1,2 @@
-export const CELL_RESIZE = 'CELL_RESIZE';
+export const RESIZE_CELL = 'RESIZE_CELL';
+export const CHANGE_TEXT = 'CHANGE_TEXT';
