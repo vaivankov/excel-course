@@ -97,6 +97,10 @@ class Dom {
     this.$element.classList.remove(className);
     return this;
   }
+
+  get data() {
+    return this.$element.dataset;
+  }
 }
 
 export function $(selector) {

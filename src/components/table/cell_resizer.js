@@ -8,7 +8,7 @@ export function resizeCell($root, event) {
     const $rowHeader = Array.from($row.children);
     const resizeCellIndex = $rowHeader.indexOf($cellHeader.$element);
     const coords = $cellHeader.getCoords();
-    const type = $resizer.$element.dataset.resize;
+    const type = $resizer.data.resize;
     const propertySide = type === 'col' ? 'right' : 'bottom';
     const propertyDirection = type === 'col' ? 'X' : 'Y';
     const propertySize = type === 'col' ? 'width' : 'height';
