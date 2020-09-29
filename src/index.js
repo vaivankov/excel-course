@@ -15,10 +15,6 @@ const store = createStore(
 );
 
 store.subscribe((state) => {
-  console.log(
-      'AppState',
-      state
-  );
   checkStorage(
       'excel-state',
       state

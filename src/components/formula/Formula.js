@@ -10,6 +10,7 @@ export class Formula extends ExcelComponent {
         {
           name: 'Formula',
           listeners: ['input', 'keydown'],
+          subscribes: ['currentText'],
           ...options,
         }
     );
@@ -37,14 +38,10 @@ export class Formula extends ExcelComponent {
           this.$formula.text($cell.text());
         }
     );
+  }
 
-    this.$subscribe((state) => {
-      console.log(
-          'Formula update',
-          state.currentText
-      );
-      this.$formula.text(state.currentText);
-    });
+  storeChanged({currentText}) {
+    this.$formula.text(currentText);
   }
 
   onInput(evt) {

@@ -3,10 +3,10 @@ import {CHANGE_TEXT, RESIZE_CELL} from './type';
 export function rootReducer(state, action) {
   let prevState;
   let field;
-  console.log(
-      'Action',
-      action
-  );
+  // console.log(
+  //     'Action',
+  //     action
+  // );
   switch (action.type) {
     case RESIZE_CELL:
       field = action.data.type === 'col' ? 'colState' : 'rowState';
