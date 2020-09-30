@@ -88,6 +88,16 @@ class Dom {
           this.$element.style[key] = styles[key]);
   }
 
+  getStyles(styles = []) {
+    return styles.reduce(
+        (res, s) => {
+          res[s] = this.$element.style[s];
+          return res;
+        },
+        {}
+    );
+  }
+
   addClass(className) {
     this.$element.classList.add(className);
     return this;

@@ -5,6 +5,7 @@ import {resizeCell} from "./cell_resizer";
 import {TableSelection} from './TableSelection';
 import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
 import * as actions from '../../redux/actions';
+import {defaultStyles} from '../../constants';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -31,47 +32,14 @@ export class Table extends ExcelComponent {
     );
   }
 
-  init() {
-    super.init();
-
-    const $cell = this.$root.find('[data-id="0:0"]');
-    this.selectCell($cell);
-
-    this.$on(
-        'formula:input',
-        (text) => {
-          this.selection.current.text(text);
-          this.updateTextInStore(text);
-        }
-    );
-
-    this.$on(
-        'formula:editDone',
-        (evt) => {
-          const keys = [
-            'Enter', 'Tab',
-          ];
-          if (keys.includes(evt.key)) {
-            evt.preventDefault();
-            this.selection.current.focusCell();
-          }
-        }
-    );
-
-    this.$on(
-        'toolbar:applyStyle',
-        (style)=>{
-          this.selection.applyStyle(style);
-        }
-    );
-  }
-
   selectCell($cell) {
     this.selection.select($cell);
     this.$emit(
         'table:selectCell',
         $cell
     );
+    const styles = $cell.getStyles(Object.keys(defaultStyles));
+    this.$dispatch(actions.changeStyles(styles));
   }
 
   async resizeTable(event) {
@@ -133,6 +101,45 @@ export class Table extends ExcelComponent {
   }
 
   onInput(evt) {
-    this.updateTextInStore($(event.target).text());
+    this.updateTextInStore($(evt.target).text());
+  }
+
+  init() {
+    super.init();
+
+    const $cell = this.$root.find('[data-id="0:0"]');
+    this.selectCell($cell);
+
+    this.$on(
+        'formula:input',
+        (text) => {
+          this.selection.current.text(text);
+          this.updateTextInStore(text);
+        }
+    );
+
+    this.$on(
+        'formula:editDone',
+        (evt) => {
+          const keys = [
+            'Enter', 'Tab',
+          ];
+          if (keys.includes(evt.key)) {
+            evt.preventDefault();
+            this.selection.current.focusCell();
+          }
+        }
+    );
+
+    this.$on(
+        'toolbar:applyStyle',
+        (value) => {
+          this.selection.applyStyle(value);
+          this.$dispatch(actions.applyStyle({
+            value,
+            ids: this.selection.selectedIds,
+          }));
+        }
+    );
   }
 }

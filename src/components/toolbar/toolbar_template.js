@@ -40,7 +40,7 @@ export function createToolbar(state) {
       icon: "format_italic",
       active: state['fontStyle'] === 'italic',
       value: {
-        fontStyle: state['fontStyle'] === 'italic' ? 'none' : 'italic',
+        fontStyle: state['fontStyle'] === 'italic' ? 'normal' : 'italic',
       },
     },
     {

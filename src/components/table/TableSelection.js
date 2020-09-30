@@ -19,6 +19,10 @@ export class TableSelection {
     this.group = [];
   }
 
+  get selectedIds() {
+    return this.group.map(($element)=>$element.getId());
+  }
+
   selectGroup($group = []) {
     this.clear();
 

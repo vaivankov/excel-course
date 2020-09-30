@@ -1,30 +1,59 @@
-import {CHANGE_TEXT, RESIZE_CELL} from './type';
+import {CHANGE_TEXT, CHANGE_STYLES, RESIZE_CELL, APPLY_STYLE} from './type';
 
 export function rootReducer(state, action) {
-  let prevState;
   let field;
-  // console.log(
-  //     'Action',
-  //     action
-  // );
+  let val;
   switch (action.type) {
     case RESIZE_CELL:
       field = action.data.type === 'col' ? 'colState' : 'rowState';
-      prevState = state[field] || {};
-      prevState[action.data.id] = action.data.value;
       return {
         ...state,
-        [field]: prevState,
+        [field]: value(
+            state,
+            field,
+            action
+        ),
       };
     case CHANGE_TEXT:
-      prevState = state['dataState'] || {};
-      prevState[action.data.id] = action.data.value;
+      field = 'dataState';
       return {
         ...state,
         currentText: action.data.value,
-        dataState: prevState,
+        [field]: value(
+            state,
+            field,
+            action
+        ),
+      };
+    case CHANGE_STYLES:
+      return {
+        ...state,
+        currentStyles: action.data,
+      };
+    case APPLY_STYLE:
+      field = 'stylesState';
+      val = state[field] || {};
+      action.data.ids.forEach((id) => {
+        val[id] = {
+          ...val[id],
+          ...action.data.value,
+        };
+      });
+      return {
+        ...state,
+        [field]: val,
+        currentStyles: {
+          ...action.data.value,
+          ...state.currentStyles,
+        },
       };
     default:
       return state;
   }
+}
+
+function value(state, field, action) {
+  const val = state[field] || {};
+  val[action.data.id] = action.data.value;
+  return val;
 }
