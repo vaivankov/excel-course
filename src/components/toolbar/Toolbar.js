@@ -1,4 +1,4 @@
-import {defaultStyles} from '../../constants';
+import {defaultToolbarStyles} from '../../constants';
 import {$} from '../../core/dom';
 import {ExcelStateComponent} from '../../core/ExcelStateComponent';
 import {createToolbar} from './toolbar_template';
@@ -19,7 +19,7 @@ export class Toolbar extends ExcelStateComponent {
   }
 
   prepare() {
-    this.initState(defaultStyles);
+    this.initState(defaultToolbarStyles);
   }
 
   get template() {
@@ -53,7 +53,7 @@ export class Toolbar extends ExcelStateComponent {
     this.$on(
         'table:selectCell',
         ($cell) => {
-          const cellStyles = $cell.getStyles(Object.keys(defaultStyles));
+          const cellStyles = $cell.getStyles(Object.keys(defaultToolbarStyles));
           this.setState(cellStyles);
         }
     );

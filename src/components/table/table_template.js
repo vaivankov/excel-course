@@ -1,4 +1,4 @@
-import {defaultStyles} from '../../constants';
+import {defaultToolbarStyles} from '../../constants';
 import {toInlineStyles} from '../../core/utils';
 import * as defaultValues from './default_values';
 
@@ -24,7 +24,7 @@ function toCell(row, state) {
     const id = `${row}:${col}`;
     const text = state.dataState[id] || '';
     const styles = toInlineStyles({
-      ...defaultStyles,
+      ...defaultToolbarStyles,
       ...state.stylesState[id],
     });
     return `

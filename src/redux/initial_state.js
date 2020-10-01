@@ -1,4 +1,4 @@
-import {defaultStyles} from "../constants";
+import {defaultToolbarStyles} from "../constants";
 import {checkStorage} from "../core/utils";
 
 const defaultState = {
@@ -7,13 +7,13 @@ const defaultState = {
   dataState: {},
   stylesState: {},
   currentText: '',
-  currentStyles: defaultStyles,
+  currentStyles: defaultToolbarStyles,
 };
 
 function normalize(state) {
   return {
     ...state,
-    currentStyles: defaultStyles,
+    currentStyles: defaultToolbarStyles,
     currentText: '',
   };
 }

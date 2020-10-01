@@ -5,7 +5,7 @@ import {resizeCell} from "./cell_resizer";
 import {TableSelection} from './TableSelection';
 import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
 import * as actions from '../../redux/actions';
-import {defaultStyles} from '../../constants';
+import {defaultToolbarStyles} from '../../constants';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -38,7 +38,7 @@ export class Table extends ExcelComponent {
         'table:selectCell',
         $cell
     );
-    const styles = $cell.getStyles(Object.keys(defaultStyles));
+    const styles = $cell.getStyles(Object.keys(defaultToolbarStyles));
     this.$dispatch(actions.changeStyles(styles));
   }
 

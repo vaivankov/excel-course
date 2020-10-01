@@ -44,6 +44,7 @@ export class Excel {
 
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
+    console.log(this);
   }
 
   destroy() {

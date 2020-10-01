@@ -1,6 +1,8 @@
-import {ExcelComponent} from "@core/ExcelComponent";
+import {ExcelStateComponent} from "@core/ExcelStateComponent";
+import {defaultTableState} from "../../constants";
+import {createHeader} from "./header_template";
 
-export class Header extends ExcelComponent {
+export class Header extends ExcelStateComponent {
   static className = 'excel__header'
 
   constructor($root, options) {
@@ -8,23 +10,27 @@ export class Header extends ExcelComponent {
         $root,
         {
           name: 'Header',
+          listeners: ['change'],
+          subscribe: ['currentTitle'],
           ...options,
         }
     );
   }
 
+  prepare() {
+    this.initState(defaultTableState);
+  }
+
+  get template() {
+    return createHeader(this.state);
+  }
+
   toHTML() {
-    return `
-      <div class="header__input-wrapper">
-        <input type="text" class="header__input" value="New table" />
-      </div>
-      <div class="header__buttons-wrapper">
-        <button class="button header__button" type="button">
-          <span class="material-icons">delete</span>
-        </button>
-        <button class="button header__button" type="button">
-          <span class="material-icons">exit_to_app</span>
-        </button>
-      </div>`;
+    return this.template;
+  }
+
+  onChange(evt) {
+    console.log(evt);
+    console.log(evt.target.value);
   }
 }
