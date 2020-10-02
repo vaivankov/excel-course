@@ -13,7 +13,11 @@ export function createHeader(state) {
   ];
   return `
       <div class="header__input-wrapper">
-        <input type="text" class="header__input" value="${state.title}" />
+        <input
+          type="text"
+          class="header__input"
+          value="${state.currentTableState.title}" 
+        />
       </div>
       <div class="header__buttons-wrapper">
         ${buttons.map(toButton).join('')}

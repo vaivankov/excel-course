@@ -10,7 +10,7 @@ export class Formula extends ExcelComponent {
         {
           name: 'Formula',
           listeners: ['input', 'keydown'],
-          subscribes: ['currentText'],
+          subscribes: ['currentCellText'],
           ...options,
         }
     );
@@ -40,8 +40,8 @@ export class Formula extends ExcelComponent {
     );
   }
 
-  storeChanged({currentText}) {
-    this.$formula.text(currentText);
+  storeChanged({currentCellText}) {
+    this.$formula.text(currentCellText);
   }
 
   onInput(evt) {

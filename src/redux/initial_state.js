@@ -1,4 +1,4 @@
-import {defaultToolbarStyles} from "../constants";
+import {defaultTableState, defaultToolbarStyles} from "../constants";
 import {checkStorage} from "../core/utils";
 
 const defaultState = {
@@ -6,15 +6,16 @@ const defaultState = {
   rowState: {},
   dataState: {},
   stylesState: {},
-  currentText: '',
-  currentStyles: defaultToolbarStyles,
+  currentCellText: '',
+  currentTableState: defaultTableState,
+  currentToolbarStyles: defaultToolbarStyles,
 };
 
 function normalize(state) {
   return {
     ...state,
-    currentStyles: defaultToolbarStyles,
-    currentText: '',
+    currentCellText: '',
+    currentToolbarStyles: defaultToolbarStyles,
   };
 }
 

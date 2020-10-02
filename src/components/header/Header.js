@@ -1,5 +1,6 @@
 import {ExcelStateComponent} from "@core/ExcelStateComponent";
 import {defaultTableState} from "../../constants";
+import * as actions from "../../redux/actions";
 import {createHeader} from "./header_template";
 
 export class Header extends ExcelStateComponent {
@@ -11,7 +12,7 @@ export class Header extends ExcelStateComponent {
         {
           name: 'Header',
           listeners: ['change'],
-          subscribe: ['currentTitle'],
+          subscribes: ['currentTableState'],
           ...options,
         }
     );
@@ -22,15 +23,23 @@ export class Header extends ExcelStateComponent {
   }
 
   get template() {
-    return createHeader(this.state);
+    return createHeader(this.store.getState());
   }
 
   toHTML() {
     return this.template;
   }
 
+  storeChanged(changes) {
+    this.setState(changes.currentTableState);
+  }
+
+  updateTitleInStore(value) {
+    this.$dispatch(actions.changeTitle(value));
+  }
+
   onChange(evt) {
-    console.log(evt);
-    console.log(evt.target.value);
+    const value = {'title': evt.target.value};
+    this.updateTitleInStore(value);
   }
 }

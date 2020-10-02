@@ -12,7 +12,7 @@ export class Toolbar extends ExcelStateComponent {
         {
           name: 'Toolbar',
           listeners: ['click'],
-          subscribe: ['currentStyles'],
+          subscribes: ['currentToolbarStyles'],
           ...options,
         }
     );
@@ -31,7 +31,7 @@ export class Toolbar extends ExcelStateComponent {
   }
 
   storeChanged(changes) {
-    this.setState(changes.currentStyles);
+    this.setState(changes.currentToolbarStyles);
   }
 
   onClick(event) {
@@ -45,17 +45,5 @@ export class Toolbar extends ExcelStateComponent {
       const key = Object.keys(value)[0];
       this.setState({[key]: value[key]});
     }
-  }
-
-  init() {
-    super.init();
-
-    this.$on(
-        'table:selectCell',
-        ($cell) => {
-          const cellStyles = $cell.getStyles(Object.keys(defaultToolbarStyles));
-          this.setState(cellStyles);
-        }
-    );
   }
 }

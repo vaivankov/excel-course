@@ -1,10 +1,10 @@
-import {CHANGE_TEXT, CHANGE_STYLES, RESIZE_CELL, APPLY_STYLE} from './type';
+import * as types from './type';
 
 export function rootReducer(state, action) {
   let field;
   let val;
   switch (action.type) {
-    case RESIZE_CELL:
+    case types.RESIZE_CELL:
       field = action.data.type === 'col' ? 'colState' : 'rowState';
       return {
         ...state,
@@ -14,23 +14,23 @@ export function rootReducer(state, action) {
             action
         ),
       };
-    case CHANGE_TEXT:
+    case types.CHANGE_TEXT:
       field = 'dataState';
       return {
         ...state,
-        currentText: action.data.value,
+        currentCellText: action.data.value,
         [field]: value(
             state,
             field,
             action
         ),
       };
-    case CHANGE_STYLES:
+    case types.CHANGE_STYLES:
       return {
         ...state,
-        currentStyles: action.data,
+        currentToolbarStyles: action.data,
       };
-    case APPLY_STYLE:
+    case types.APPLY_STYLE:
       field = 'stylesState';
       val = state[field] || {};
       action.data.ids.forEach((id) => {
@@ -42,10 +42,15 @@ export function rootReducer(state, action) {
       return {
         ...state,
         [field]: val,
-        currentStyles: {
+        currentToolbarStyles: {
           ...action.data.value,
-          ...state.currentStyles,
+          ...state.currentToolbarStyles,
         },
+      };
+    case types.CHANGE_TITLE:
+      return {
+        ...state,
+        currentTableState: action.data,
       };
     default:
       return state;
