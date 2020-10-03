@@ -6,6 +6,7 @@ import {TableSelection} from './TableSelection';
 import {isCell, getMatrix, shouldResize, nextSelector} from "./table_functions";
 import * as actions from '../../redux/actions';
 import {defaultToolbarStyles} from '../../constants';
+import {parse} from '../../core/parse';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -100,8 +101,12 @@ export class Table extends ExcelComponent {
     }));
   }
 
-  onInput(evt) {
-    this.updateTextInStore($(evt.target).text());
+  onInput() {
+    const cell = this.selection.current;
+    const text = cell.text();
+    cell.data.value = text;
+    this.updateTextInStore(text);
+    cell.$element.textContent = parse(text);
   }
 
   init() {
@@ -112,9 +117,14 @@ export class Table extends ExcelComponent {
 
     this.$on(
         'formula:input',
-        (text) => {
-          this.selection.current.text(text);
-          this.updateTextInStore(text);
+        (value) => {
+          this.selection.current
+              .attribute(
+                  'data-value',
+                  value
+              )
+              .text(parse(value));
+          this.updateTextInStore(value);
         }
     );
 

@@ -14,14 +14,16 @@ class Dom {
   }
 
   text(text) {
-    if (typeof text === 'string') {
+    if (typeof text !== 'undefined') {
       this.$element.textContent = text;
       return this;
     }
     if (this.$element.tagName.toLowerCase() === 'input') {
       return this.$element.value.trim();
     }
-    return this.$element.textContent.trim();
+    if (this.$element.tagName.toLowerCase() === 'div') {
+      return this.$element.textContent.trim();
+    }
   }
 
   clear() {
@@ -79,6 +81,17 @@ class Dom {
   focusCell() {
     this.$element.focus();
     return this;
+  }
+
+  attribute(name, value) {
+    if (value) {
+      this.$element.setAttribute(
+          name,
+          value
+      );
+      return this;
+    }
+    return this.$element.getAttribute(name);
   }
 
   css(styles = {}) {

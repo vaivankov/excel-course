@@ -1,4 +1,5 @@
 import {defaultToolbarStyles} from '../../constants';
+import {parse} from '../../core/parse';
 import {toInlineStyles} from '../../core/utils';
 import * as defaultValues from './default_values';
 
@@ -33,9 +34,10 @@ function toCell(row, state) {
         contenteditable 
         data-col="${col}"
         data-type="cell"
-        data-id=${id}
+        data-id="${id}"
+        data-value="${text}"
         style="${styles};width:${width}"
-      >${text}</div>
+      >${parse(text)}</div>
     `;
   };
 }
