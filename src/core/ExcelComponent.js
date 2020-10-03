@@ -8,6 +8,8 @@ export class ExcelComponent extends DomListener {
     );
     this.name = options.name || '';
     this.emitter = options.emitter;
+    this.subscribes = options.subscribes || [];
+    this.store = options.store;
     this.unsubscribers = [];
 
     this.prepare();
@@ -30,6 +32,18 @@ export class ExcelComponent extends DomListener {
         func
     );
     this.unsubscribers.push(unsub);
+  }
+
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
+
+  isWatching(key) {
+    return this.subscribes.includes(key);
+  }
+
+  storeChanged() {
+    return;
   }
 
   toHTML() {

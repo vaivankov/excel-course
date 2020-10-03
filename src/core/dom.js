@@ -14,14 +14,16 @@ class Dom {
   }
 
   text(text) {
-    if (typeof text === 'string') {
+    if (typeof text !== 'undefined') {
       this.$element.textContent = text;
       return this;
     }
     if (this.$element.tagName.toLowerCase() === 'input') {
       return this.$element.value.trim();
     }
-    return this.$element.textContent.trim();
+    if (this.$element.tagName.toLowerCase() === 'div') {
+      return this.$element.textContent.trim();
+    }
   }
 
   clear() {
@@ -81,11 +83,32 @@ class Dom {
     return this;
   }
 
+  attribute(name, value) {
+    if (value) {
+      this.$element.setAttribute(
+          name,
+          value
+      );
+      return this;
+    }
+    return this.$element.getAttribute(name);
+  }
+
   css(styles = {}) {
     Object
         .keys(styles)
         .forEach((key) =>
           this.$element.style[key] = styles[key]);
+  }
+
+  getStyles(styles = []) {
+    return styles.reduce(
+        (res, s) => {
+          res[s] = this.$element.style[s];
+          return res;
+        },
+        {}
+    );
   }
 
   addClass(className) {
@@ -96,6 +119,10 @@ class Dom {
   removeClass(className) {
     this.$element.classList.remove(className);
     return this;
+  }
+
+  get data() {
+    return this.$element.dataset;
   }
 }
 

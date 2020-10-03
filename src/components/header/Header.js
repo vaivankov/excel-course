@@ -1,6 +1,9 @@
-import {ExcelComponent} from "@core/ExcelComponent";
+import {ExcelStateComponent} from "@core/ExcelStateComponent";
+import {defaultTableState} from "../../constants";
+import * as actions from "../../redux/actions";
+import {createHeader} from "./header_template";
 
-export class Header extends ExcelComponent {
+export class Header extends ExcelStateComponent {
   static className = 'excel__header'
 
   constructor($root, options) {
@@ -8,23 +11,35 @@ export class Header extends ExcelComponent {
         $root,
         {
           name: 'Header',
+          listeners: ['change'],
+          subscribes: ['currentTableState'],
           ...options,
         }
     );
   }
 
+  prepare() {
+    this.initState(defaultTableState);
+  }
+
+  get template() {
+    return createHeader(this.store.getState());
+  }
+
   toHTML() {
-    return `
-      <div class="header__input-wrapper">
-        <input type="text" class="header__input" value="New table" />
-      </div>
-      <div class="header__buttons-wrapper">
-        <button class="button header__button" type="button">
-          <span class="material-icons">delete</span>
-        </button>
-        <button class="button header__button" type="button">
-          <span class="material-icons">exit_to_app</span>
-        </button>
-      </div>`;
+    return this.template;
+  }
+
+  storeChanged(changes) {
+    this.setState(changes.currentTableState);
+  }
+
+  updateTitleInStore(value) {
+    this.$dispatch(actions.changeTitle(value));
+  }
+
+  onChange(evt) {
+    const value = {'title': evt.target.value};
+    this.updateTitleInStore(value);
   }
 }
