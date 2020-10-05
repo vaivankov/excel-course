@@ -1,12 +1,30 @@
-function toHTML() {
+import {checkStorage} from "../core/utils";
+
+function toHTML(key) {
+  const state = checkStorage(key);
+  const ms = parseTime(key);
+  const date = new Date(ms);
+
   return `
-      <li class="dashboard__record">
-        <a class="dashboard__link" href="#">Table 1</a>
-        <time datetime="2020-12-06">
-          <b>12.06.2020</b>
-        </time>
+      <li>
+        <a
+          class="dashboard__record"
+          href="#excel/${ms}"
+        >
+          ${state.currentTableState.title}
+          <time datetime="${date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]}">
+            <b>
+              ${date.toLocaleTimeString() +
+              ' ' + date.toLocaleDateString()}
+            </b>
+          </time>
+        </a>
       </li>  
   `;
+}
+
+function parseTime(key) {
+  return +key.match(/\d+/)[0];
 }
 
 function getAllKeys() {
@@ -20,7 +38,7 @@ function getAllKeys() {
     keys.push(key);
   }
 
-  return keys;
+  return keys.reverse();
 }
 
 export function createTableRecords() {
