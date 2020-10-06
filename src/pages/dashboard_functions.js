@@ -2,7 +2,7 @@ import {checkStorage} from "../core/utils";
 
 function toHTML(key) {
   const state = checkStorage(key);
-  const ms = parseTime(key);
+  const ms = +key.split(':')[1];
   const date = new Date(ms);
 
   return `
@@ -12,7 +12,7 @@ function toHTML(key) {
           href="#excel/${ms}"
         >
           ${state.currentTableState.title}
-          <time datetime="${date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]}">
+          <time datetime="${date.toISOString()}">
             <b>
               ${date.toLocaleTimeString() +
               ' ' + date.toLocaleDateString()}
@@ -21,10 +21,6 @@ function toHTML(key) {
         </a>
       </li>  
   `;
-}
-
-function parseTime(key) {
-  return +key.match(/\d+/)[0];
 }
 
 function getAllKeys() {

@@ -1,6 +1,9 @@
 function toButton(button) {
   return `
-    <button class="button header__button" type="button">
+    <button 
+      class="button header__button" 
+      type="button" 
+    >
       <span class="material-icons">${button.icon}</span>
     </button>
   `;
