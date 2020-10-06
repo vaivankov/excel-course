@@ -9,7 +9,7 @@ import {checkStorage, debounce} from "../core/utils";
 import {rootReducer} from "../redux/rootReducer";
 import {normalizeInitialState} from "../redux/initial_state";
 
-function storageName(param) {
+export function storageName(param) {
   return 'excel:' + param;
 }
 

@@ -1,5 +1,6 @@
 import {ExcelStateComponent} from "@core/ExcelStateComponent";
 import {defaultTableState} from "../../constants";
+import {ActiveRoute} from "../../core/routes/ActiveRoute";
 import * as actions from "../../redux/actions";
 import {createHeader} from "./header_template";
 
@@ -11,7 +12,7 @@ export class Header extends ExcelStateComponent {
         $root,
         {
           name: 'Header',
-          listeners: ['change'],
+          listeners: ['change', 'click'],
           subscribes: ['currentTableState'],
           ...options,
         }
@@ -41,5 +42,21 @@ export class Header extends ExcelStateComponent {
   onChange(evt) {
     const value = {'title': evt.target.value};
     this.updateTitleInStore(value);
+  }
+
+  onClick(evt) {
+    let decision;
+    switch (evt.target.dataset.action) {
+      case "destroy":
+        decision = confirm('DELETE this table?');
+        if (decision) {
+          localStorage.removeItem('excel:' + ActiveRoute.param);
+          window.location.href = window.location.origin;
+        }
+        break;
+      case "exit":
+        window.location.href = window.location.origin;
+        break;
+    }
   }
 }

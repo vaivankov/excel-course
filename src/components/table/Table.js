@@ -35,11 +35,14 @@ export class Table extends ExcelComponent {
 
   selectCell($cell) {
     this.selection.select($cell);
+
     this.$emit(
         'table:selectCell',
         $cell
     );
+
     const styles = $cell.getStyles(Object.keys(defaultToolbarStyles));
+
     this.$dispatch(actions.changeStyles(styles));
   }
 

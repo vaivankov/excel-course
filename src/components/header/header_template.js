@@ -2,17 +2,29 @@ function toButton(button) {
   return `
     <button 
       class="button header__button" 
-      type="button" 
+      type="button"
+      data-action="${button.action}"
     >
-      <span class="material-icons">${button.icon}</span>
+      <span
+        class="material-icons"
+        data-action="${button.action}"
+      >
+        ${button.icon}
+      </span>
     </button>
   `;
 }
 
 export function createHeader(state) {
   const buttons = [
-    {icon: "delete"},
-    {icon: "exit_to_app"},
+    {
+      icon: "delete",
+      action: "destroy",
+    },
+    {
+      icon: "exit_to_app",
+      action: "exit",
+    },
   ];
   return `
       <div class="header__input-wrapper">
