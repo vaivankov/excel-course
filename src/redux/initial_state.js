@@ -1,5 +1,5 @@
 import {defaultTableState, defaultToolbarStyles} from "../constants";
-import {checkStorage} from "../core/utils";
+import {clone} from "../core/utils";
 
 const defaultState = {
   colState: {},
@@ -19,6 +19,6 @@ function normalize(state) {
   };
 }
 
-export const initialState = checkStorage('excel-state') ?
-  normalize(checkStorage('excel-state')) :
-  defaultState;
+export function normalizeInitialState(state) {
+  return state ? normalize(state) : clone(defaultState);
+}
