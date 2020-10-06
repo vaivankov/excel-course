@@ -4,19 +4,17 @@ function toHTML(key) {
   const state = checkStorage(key);
   const ms = +key.split(':')[1];
   const date = new Date(ms);
+  const title = state.currentTableState.title;
+  const dateISO = date.toISOString();
+  const dateTime = date.toLocaleTimeString();
+  const dateDate = date.toLocaleDateString();
 
   return `
       <li>
-        <a
-          class="dashboard__record"
-          href="#excel/${ms}"
-        >
-          ${state.currentTableState.title}
-          <time datetime="${date.toISOString()}">
-            <b>
-              ${date.toLocaleTimeString() +
-              ' ' + date.toLocaleDateString()}
-            </b>
+        <a class="dashboard__record" href="#excel/${ms}">
+          ${title}
+          <time datetime="${dateISO}">
+            <b>${dateTime + ' ' + dateDate}</b>
           </time>
         </a>
       </li>  
