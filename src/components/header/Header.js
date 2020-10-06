@@ -51,11 +51,13 @@ export class Header extends ExcelStateComponent {
         decision = confirm('DELETE this table?');
         if (decision) {
           localStorage.removeItem('excel:' + ActiveRoute.param);
-          window.location.href = window.location.origin;
+          window.location.href = window.location.origin +
+            window.location.pathname;
         }
         break;
       case "exit":
-        window.location.href = window.location.origin;
+        window.location.href = window.location.origin +
+          window.location.pathname;
         break;
     }
   }
