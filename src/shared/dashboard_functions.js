@@ -3,7 +3,7 @@ import {checkStorage} from "../core/utils";
 function toHTML(key) {
   const state = checkStorage(key);
   const ms = +key.split(':')[1];
-  const date = new Date(ms);
+  const date = new Date(Date.parse(state.openedDate));
   const title = state.currentTableState.title;
   const dateISO = date.toISOString();
   const dateTime = date.toLocaleTimeString();
@@ -32,7 +32,7 @@ function getAllKeys() {
     keys.push(key);
   }
 
-  return keys.reverse();
+  return keys;
 }
 
 export function createTableRecords() {
@@ -44,7 +44,7 @@ export function createTableRecords() {
 
   return `<div class="dashboard__list-header">
             <span>Name</span>
-            <span>Date</span>
+            <span>Last opened</span>
           </div>
           <ul class="dashboard__list">
             ${keys.map(toHTML).join('')}

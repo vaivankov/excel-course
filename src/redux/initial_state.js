@@ -9,6 +9,7 @@ const defaultState = {
   currentCellText: '',
   currentTableState: defaultTableState,
   currentToolbarStyles: defaultToolbarStyles,
+  openedDate: new Date().toJSON(),
 };
 
 function normalize(state) {
