@@ -1,4 +1,4 @@
-import {$} from '@core/dom';
+import {$} from '../dom';
 import {Loader} from '../../components/Loader';
 import {ActiveRoute} from './ActiveRoute';
 
