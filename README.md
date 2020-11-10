@@ -1,7 +1,5 @@
 # EXCEL
-Pure JavaScript SPA.
-
-Проект SPA для работы с таблицами по курсу "JavaScript Профессионал".
+Pure JavaScript SPA по курсу "JavaScript Профессионал"
 
 - [x] Инструменты:
   - ES6+
